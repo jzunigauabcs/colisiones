@@ -23,9 +23,16 @@
       function draw() {
         let x1 = parseInt(width * 0.5);
         let y1 = parseInt(height * 0.5);
+        background('white');
+        //rectangleRectagle(x1, y1);
+        circleCircle(x1, y1);
+      }
+
+      function rectangleRectagle(x1, y1) {
+        
         let w = 100;
         let h = 80;
-        background('white');
+        
         if(rectCollision(x1, y1, mouseX, mouseY, w, h)) {
           fill("red");
           stroke("black");
@@ -36,6 +43,22 @@
         rect(x1, y1, w, h);
         
         rect(mouseX, mouseY, w, h);
+      }
+
+      function circleCircle(x1, y1) {
+        const r = 50;
+
+         if(circleCollision(x1, y1, mouseX, mouseY, r)) {
+          fill("red");
+          stroke("black");
+        } else {
+          noFill();
+        stroke("blue");
+        }
+
+        ellipseMode(RADIUS);
+        ellipse(x1, y1, r);
+        ellipse(mouseX, mouseY, r);
       }
 
       function rectCollision(x1, y1, x2, y2, w, h) {
@@ -50,6 +73,14 @@
 
         return right >= eLeft && left <= eRight && 
           top <= eBottom && bottom >= eTop;
+      }
+
+      function circleCollision(x1, y1, x2, y2, r1, r2) {
+        return r1 + r2 >= distance(x1, y1, x2, y2)
+      }
+
+      function distance(x1, y1, x2, y2) {
+        return sqrt(pow(abs(x2 - x1), 2) + pow(abs(y2 - y1), 2))
       }
     </script>
   </body>

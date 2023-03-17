@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js" integrity="sha512-3RlxD1bW34eFKPwj9gUXEWtdSMC59QqIqHnD8O/NoTwSJhgxRizdcFVQhUMFyTp5RwLTDL0Lbcqtl8b7bFAzog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script>
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+      }
+
+      function draw() {
+        let x1 = parseInt(width * 0.5);
+        let y1 = parseInt(height * 0.5);
+        let w = 100;
+        let h = 80;
+        background('white');
+        if(rectCollision(x1, y1, mouseX, mouseY, w, h)) {
+          fill("red");
+          stroke("black");
+        } else {
+          noFill();
+        stroke("blue");
+        }
+        rect(x1, y1, w, h);
+        
+        rect(mouseX, mouseY, w, h);
+      }
+
+      function rectCollision(x1, y1, x2, y2, w, h) {
+        const left = x1;
+        const right = x1 + w;
+        const top = y1;
+        const bottom = y1 + h;
+        const eLeft = x2;
+        const eRight = x2 + w;
+        const eTop = y2;
+        const eBottom = y2 + h;
+
+        return right >= eLeft && left <= eRight && 
+          top <= eBottom && bottom >= eTop;
+      }
+    </script>
+  </body>
+</html>
